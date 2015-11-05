@@ -13,34 +13,38 @@ sub encode_jsonl{
 	
 	my ($perlscalar) = @_;
 	
-	@array = split("\n", $perlscalar);
+	my $jsontext = encode_json $perlscalar;
 	
-	my @result = ();
+	$jsontext =~ s/}\,/}\n/g;
 	
-	my $jsontext = 0;
-			
-	for my $i (0..$#array){
+	$jsontext =~ s/\[\{/\{/;
+	
+	$jsontext =~ s/}\]/}/;
+	
+	return $jsontext;
 
-		if($array[$i] eq "[" || $array[$i] eq "]"){
-		
-			next ;
-			
-		}
-		else{
-			
-			$jsontext = encode_json $array[$i];		
-		
-			push @result, $jsontext;
-		
-		}
-		
-	}
-	
-	my $res = join("\n",@result);
-	
-	return $res;
-	
 }
 
 sub decode_jsonl{
+
+	my ($jsontext) = @_;
+	
+	$jsontext =~ s/ \+ //g;
+	
+	$jsontext =~ s/'//g;
+	
+	$jsontext =~ s/}"\n"{/}\n{/g;
+	
+	my @array = split("\n", $jsontext);
+	
+	my @result = ();
+	
+	for my $arg(@array){			
+		
+		push @result, decode_json $arg;
+		
+	}	
+	
+	return \@result;
+
 }
