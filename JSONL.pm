@@ -13,15 +13,19 @@ sub encode_jsonl{
 	
 	my ($perlscalar) = @_;
 	
-	my $jsontext = encode_json $perlscalar;
+	my @array = @{$perlscalar};
 	
-	$jsontext =~ s/}\,/}\n/g;
+	my @result = ();
+
+	for my $arg(@array){
 	
-	$jsontext =~ s/\[\{/\{/;
+		push @result, encode_json $arg;
 	
-	$jsontext =~ s/}\]/}/;
+	}
 	
-	return $jsontext;
+	my $str = join("\n", @result);
+	
+	return $str;
 
 }
 
