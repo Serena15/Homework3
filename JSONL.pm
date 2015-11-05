@@ -29,12 +29,6 @@ sub decode_jsonl{
 
 	my ($jsontext) = @_;
 	
-	$jsontext =~ s/ \+ //g;
-	
-	$jsontext =~ s/'//g;
-	
-	$jsontext =~ s/}"\n"{/}\n{/g;
-	
 	my @array = split("\n", $jsontext);
 	
 	my @result = ();
