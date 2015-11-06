@@ -12,7 +12,7 @@ sub encode_jsonl {
 	my ($array_perl) = @_;
 	my @array = @{$array_perl};
 	my @result = ();
-	for my $arg(@array){
+	for my $arg(@array) {
 		push @result, encode_json $arg;
 	}
 	my $str = join("\n", @result);
@@ -23,7 +23,7 @@ sub decode_jsonl {
 	my ($jsontext) = @_;
 	my @array = split("\n", $jsontext);
 	my @result = ();
-	for my $arg(@array){
+	for my $arg(@array) {
 		push @result, decode_json $arg;
 	}	
 	return \@result;
