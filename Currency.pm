@@ -33,3 +33,5 @@ sub AUTOLOAD {
 		return $result_summ;
 
 }
+
+1;
