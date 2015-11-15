@@ -16,7 +16,7 @@ sub set_rate {
 sub AUTOLOAD {
 	my ($start_summ) = @_;
 	our $AUTOLOAD;
-	my @array = split("::",$AUTOLOAD);
+	my @array = split(/::/,$AUTOLOAD);
 	my $my_currency = $array[-1];
 	my $cur2;
 	($my_currency, $cur2) = split(/_to_/, $my_currency);
