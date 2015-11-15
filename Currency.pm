@@ -17,7 +17,7 @@ sub AUTOLOAD {
 	my ($start_summ) = @_;
 	our $AUTOLOAD;
 	my @array = split("::",$AUTOLOAD);
-	my $my_currency = $array[$#array];
+	my $my_currency = $array[-1];
 	my $cur2 = substr($my_currency, rindex($my_currency, 'to_') + 3);
 	$my_currency =~ s/$cur2//;
 	$my_currency =~ s/to//;
