@@ -18,10 +18,8 @@ sub AUTOLOAD {
 	our $AUTOLOAD;
 	my @array = split("::",$AUTOLOAD);
 	my $my_currency = $array[-1];
-	my $cur2 = substr($my_currency, rindex($my_currency, 'to_') + 3);
-	$my_currency =~ s/$cur2//;
-	$my_currency =~ s/to//;
-	$my_currency =~ s/_//g;
+	my $cur2;
+	($my_currency, $cur2) = split(/_to_/, $my_currency);
 	my $cours_cur1 = $hash{$my_currency};
 	my $cours_cur2 = $hash{$cur2};
 	my $result_summ = $cours_cur1/$cours_cur2 * $start_summ;
